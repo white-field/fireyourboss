@@ -4,12 +4,14 @@ html, body, .app {
 
 body {
   background: #283c55;
-  font-family: Lora, Serif;
-  font-weight: normal;
+  font-family: 'Lora', Serif;
+  font-weight: 400;
+  font-style:normal;
   font-size: 48px;
   line-height: 1.25;
   color: #ffffff;
   min-width: 1024px;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
@@ -80,6 +82,7 @@ input:focus::placeholder {
   padding: 22px 50px;
   line-height: 1.5;
   font-size: 24px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 500;
   margin-top: 150px;
 }
