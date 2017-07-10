@@ -28,7 +28,7 @@ class AppComponent extends React.Component {
       paragraph5: null,
       paragraph6: null,
       paragraph7: null,
-      showLetter: true
+      showLetter: false
     };
   }
 
@@ -99,6 +99,10 @@ class AppComponent extends React.Component {
               </button>
             </div>
           </div>
+          <div className="main__title-container">
+            <div className="main__title">Fireyourboss</div>
+            <div className="main__subtitle">Generate your customized resignation letter</div>
+          </div>
         </div>
 
         <ReactCSSTransitionGroup
@@ -108,16 +112,16 @@ class AppComponent extends React.Component {
         >
           {state.showLetter && <div className="main__generated-letter-overlay">
             <div className="grid main__generated-letter-overlay-top-container">
-                <div>
-                  <button className="main__generated-letter-overlay-button" onClick={this.randomizeParagraphs.bind(this)}>Re-generate
-                  </button>
-                  <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}>Edit
-                  </button>
-                  <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, "")}>
-                    <button className="main__generated-letter-overlay-button">Copy</button>
-                  </CopyToClipboard>
-                </div>
-
+              <div>
+                <button className="main__generated-letter-overlay-button" onClick={this.randomizeParagraphs.bind(this)}>
+                  Re-generate
+                </button>
+                <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}>Edit
+                </button>
+                <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, "")}>
+                  <button className="main__generated-letter-overlay-button">Copy</button>
+                </CopyToClipboard>
+              </div>
             </div>
             <div className="grid">
               <div className="col-xs-10 grid">
@@ -131,6 +135,7 @@ class AppComponent extends React.Component {
           </div>
           }
         </ReactCSSTransitionGroup>
+
       </div>
     );
   }
