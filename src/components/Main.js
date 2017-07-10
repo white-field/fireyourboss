@@ -15,12 +15,12 @@ class AppComponent extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: 'Monki',
-      company: 'Google',
+      name: 'John Doe',
+      company: 'ABC Corp',
       position: 'designer',
       duration: '15 months',
-      bossName: 'Tina',
-      lastDay: 'Jun 25, 2017',
+      bossName: 'Jane Doe',
+      lastDay: moment().format('LL'),
       paragraph1: null,
       paragraph2: null,
       paragraph3: null,
