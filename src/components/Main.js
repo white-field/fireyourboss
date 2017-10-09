@@ -10,6 +10,8 @@ import paragraphs from '../sources/paragraphs';
 
 import moment from 'moment';
 
+import paypalIcon from '../images/pay-pal.svg';
+
 
 class AppComponent extends React.Component {
   constructor() {
@@ -28,7 +30,8 @@ class AppComponent extends React.Component {
       paragraph5: null,
       paragraph6: null,
       paragraph7: null,
-      showLetter: false
+      showLetter: false,
+      popupPage: null
     };
   }
 
@@ -79,10 +82,75 @@ class AppComponent extends React.Component {
     });
   }
 
+  showPopupPage(page) {
+    this.setState({
+      popupPage: page
+    })
+  }
+
+  hidePopupPage() {
+    this.setState({
+      popupPage: null
+    })
+  }
+
   render() {
     const state = this.state;
     const renderVariableInput = this.renderVariableInput.bind(this);
     const letter = `<span class="right date">${moment().format('LL')}</span>\n\nDear <span class='main__variable-in-paragraph'>${state.bossName}</span>,\n\n${state.paragraph1} \n\n${state.paragraph2} ${state.paragraph3} ${state.paragraph4} ${state.paragraph5} \n\n${state.paragraph6} ${state.paragraph7}\n\nSincerely,\n<span class='main__variable-in-paragraph'>${state.name}</span>`;
+    let popupPage;
+    switch (this.state.popupPage) {
+      case 'about':
+        popupPage = <div>
+          <div className="main__header">
+            About
+          </div>
+          <p>
+            Tired of your current job, can’t wait to fire your boss?
+          </p>
+          <p>
+            But wait, you are professional. You spent time and brainpower to search for templates and customize your
+            words into a nice, proper resignation letter. But searching and browsing is exhausting. Why not make
+            yourself a high quality, customised letter in a click? If you don’t like a sentence, tap and swap it.
+            Resignation should be hassle-free and easy breezy.
+          </p>
+          <p>
+            We don’t ever collect any of your data. Our suggestions are completely randomized from handpicked best
+            letter samples online, with a constantly growing database.
+          </p>
+          <div className="main__sub-header">
+            Who we are
+          </div>
+          <p>
+            We are a designer + developer duo from Hong Kong, currently based in London. We have a passion for
+            products, bringing nice little convenience to people with nice little tools. ♡
+          </p>
+          <p>
+            If you like this project, welcome to buy us a coffee via Paypal!
+          </p>
+          <form id="pay-pal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick"/>
+            <input type="hidden" name="hosted_button_id" value="JPRBAN5B75KZL"/>
+            <div className="main__paypal-button" onClick={() => document.forms['pay-pal-form'].submit()}>
+              Buy us a coffee via
+              <img className="main__paypal-icon" src={paypalIcon}/>
+            </div>
+          </form>
+        </div>
+        break;
+      case 'feedback':
+        popupPage = <div>
+          <div className="main__header">
+            Give feedback
+          </div>
+          <p>
+            Found bugs ? Have loads of thoughts about improving this tool? Let’s chat ! <a
+            href="mailto:hello@liltool.com">hello@liltool.com</a>
+          </p>
+        </div>
+        break;
+    }
+
     return (
       <div className="root">
         <div className="grid main__instruction-container">
@@ -102,6 +170,10 @@ class AppComponent extends React.Component {
           <div className="main__title-container">
             <div className="main__title">Fireyourboss</div>
             <div className="main__subtitle">Generate your customized resignation letter</div>
+          </div>
+          <div className="main__menu-container">
+            <div className="main__feedback" onClick={this.showPopupPage.bind(this, 'feedback')}>Give feedback</div>
+            <div className="main__about" onClick={this.showPopupPage.bind(this, 'about')}>About</div>
           </div>
         </div>
 
@@ -135,7 +207,14 @@ class AppComponent extends React.Component {
           </div>
           }
         </ReactCSSTransitionGroup>
-
+        {
+          this.state.popupPage && <div className="main__popup-container">
+            <div className="main__popup">
+              {popupPage}
+            </div>
+            <div className="main__popup-background" onClick={this.hidePopupPage.bind(this)}></div>
+          </div>
+        }
       </div>
     );
   }
