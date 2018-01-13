@@ -128,7 +128,7 @@ class AppComponent extends React.Component {
           <p>
             If you like this project, welcome to buy us a coffee via Paypal!
           </p>
-          <form id="pay-pal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <form id="pay-pal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
             <input type="hidden" name="cmd" value="_s-xclick"/>
             <input type="hidden" name="hosted_button_id" value="JPRBAN5B75KZL"/>
             <div className="main__paypal-button" onClick={() => document.forms['pay-pal-form'].submit()}>
