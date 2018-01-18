@@ -61,16 +61,19 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
+    "D": "^1.0.0",
     "classnames": "^2.2.5",
     "core-js": "^2.0.0",
     "flexboxgrid": "^6.3.1",
     "moment": "^2.18.1",
     "nl2br": "0.0.3",
+    "node-sass": "^4.7.2",
     "normalize.css": "^4.0.0",
     "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.6.0",
     "react-copy-to-clipboard": "^5.0.0",
     "react-dom": "^15.0.0",
-    "react-moment": "^0.4.2"
+    "react-moment": "^0.4.2",
+    "sass-loader": "^6.0.6"
   }
 }

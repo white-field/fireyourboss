@@ -1,0 +1,379 @@
+@import mixin/media.sass
+
+$color-white:       #FFF
+$color-blue:        #3E5673
+$color-blue-light:  #707a91
+$color-blue-dark:   #283C55
+$color-link:        #8FA5D4
+$color-yellow:      #F4DF89
+$color-title:       #8FA5D4
+$color-button:      #F8CAC7
+$color-button-text: #4D5A76
+
+$font-Lora:         'Lora', sans-serif
+$font-roboto:       'Roboto', sans-serif
+
+$transition1:       all 500ms cubic-bezier(0.25, 0.1, 0.25, 1)
+
+html, body, #app
+  height: 100%
+
+body
+  background: $color-blue
+  font-family: $font-Lora
+  font-weight: 400
+  font-style: normal
+  font-size: 48px
+  line-height: 1.25
+  color: $color-white
+  // min-width: 1024px
+  -webkit-font-smoothing: antialiased
+  overflow-y: scroll
+
+  +pad-width
+    font-size: 32px
+    line-height: 1.5
+  +small-pad-width
+    font-size: 32px
+  +phone-width
+    font-size: 18px
+
+button
+  outline: none
+  background-color: $color-button
+  color: $color-button-text
+  border: none
+  border-radius: 100px
+  cursor: pointer
+
+  &:hover
+    transition: $transition1
+    background-color: lighten($color-button, 5%)
+
+input
+  border-radius: 0
+  &::placeholder
+    color: $color-blue-light
+  &:focus::placeholder
+    opacity: 0
+
+a
+  color: $color-link
+
+.grid
+  display: block
+  max-width: 1024px
+  margin-left: auto
+  margin-right: auto
+  padding-left: 8px
+  padding-right: 8px
+
+.right
+  float: right
+
+.date
+  font-size: 18px
+  line-height: 1.33
+
+.root
+  position: relative
+
+.main
+  &__title-container
+    display: inline-block
+    z-index: 0
+    // position: absolute
+    // padding-top: 65px
+    padding-bottom: 65px
+    // top: 0
+    // left: 10px
+
+    +phone-width
+      padding-bottom: 35px
+
+  &__title
+    font-family: $font-roboto
+    font-size: 24px
+    font-weight: 500
+    line-height: 1.5
+    color: $color-title
+
+  &__subtitle
+    font-family: $font-roboto
+    font-size: 16px
+    // font-weight: bold
+    line-height: 1.5
+    color: lighten($color-title, 20%)
+
+  &__menu-container
+    // position: absolute
+    // right: 10px
+    // top: 0
+    // padding-top: 65px
+    padding-bottom: 65px
+
+    +small-pad-width
+      position: absolute
+      right: 0px
+      top: 0px
+      padding-left: 15px
+      // padding-top: 10px
+      // padding-bottom: 10px
+      width: 100%
+      padding-bottom: 0
+      background: $color-blue-dark
+
+    +phone-width
+      position: absolute
+      right: 0px
+      top: 0px
+      padding-left: 15px
+      // padding-top: 10px
+      // padding-bottom: 10px
+      width: 100%
+      padding-bottom: 0
+      background: $color-blue-dark
+
+  &__about, &__feedback
+    font-family: $font-roboto
+    font-size: 16px
+    font-weight: 500
+    line-height: 1.5
+    // color: $color-white
+    color: lighten($color-title, 20%)
+    float: right
+    margin-left: 20px
+    cursor: pointer
+    &:hover
+      color: $color-white
+      transition: $transition1
+
+    +small-pad-width
+      padding-top: 5px
+      padding-bottom: 5px
+      color: $color-white
+
+    +phone-width
+      padding-top: 5px
+      padding-bottom: 5px
+      color: $color-white
+
+  &__instruction-container
+    position: relative
+    background-color: $color-blue
+    display: block
+    padding-top: 65px
+    padding-bottom: 65px
+    padding-left: 15px
+    padding-right: 15px
+
+    +phone-width
+      padding-top: 45px
+
+  &__variable-input
+    text-align: center
+    // width: 360px
+    outline: none
+    background-color: transparent
+    border-top: none
+    border-left: none
+    border-right: none
+    border-bottom: solid 1px $color-blue-light
+    color: darken($color-button,5%)
+    display: inline-block
+
+    &:focus
+      color: darken($color-button,5%)
+      border-bottom: solid 1px $color-white
+
+    +pad-width
+      width: 240px
+
+    +phone-width
+      width: auto
+      margin-bottom: 15px
+      max-width: 100%
+
+  &__button-container
+    width: 100%
+    display: flex
+    justify-content: center
+
+  &__generate-button
+    padding: 22px 50px
+    line-height: 1.5
+    font-size: 24px
+    font-family: $font-roboto
+    font-weight: 500
+    margin-top: 60px
+
+    +phone-width
+      margin-top: 45px
+
+    .main__generate-icon
+      width : 26px
+      vertical-align: text-bottom
+
+  &__variable-in-paragraph
+    color:  darken($color-button,5%)
+
+  &__generated-letter
+
+    &-container
+      margin-left: auto
+      margin-right: auto
+      border-radius: 5px
+      background-color: $color-blue
+      margin-bottom: 176px
+      padding: 100px 95px
+
+      +small-pad-width
+        padding: 30px 30px
+
+      +phone-width
+        padding: 30px 15px
+        font-size: 18px
+
+    &-overlay
+      &
+        position: absolute
+        top: 0
+        font-size: 24px
+        line-height: 1.5
+        background-color: $color-blue-dark
+        width: 100%
+
+      &-top-container
+        display: flex
+        flex-direction: row-reverse
+        margin-top: 60px
+        margin-bottom: 60px
+
+      &-button
+        font-family: $font-roboto
+        line-height: 1.5
+        font-size: 16px
+        background-color: $color-button
+        color: $color-button-text
+        border-radius: 27px
+        box-shadow: 0 0 15px 0 rgba(51, 51, 51, 0.25)
+        padding: 15px 25px
+        margin-left: 10px
+        margin-right: 10px
+
+        +phone-width
+          margin-left: 5px
+          margin-right: 5px
+
+        .label
+          +phone-width
+            display: none
+
+      &-enter
+        transform: translateY(100%)
+        &-active
+          transform: translateY(0%)
+          transition: $transition1
+
+      &-leave
+        transform: translateY(0%)
+        &-active
+          transform: translateY(100%)
+          transition: $transition1
+
+  &__popup
+    padding: 45px
+    display: inline-block
+    width: 100%
+    max-width: 740px
+    border-radius: 2px
+    z-index: 3
+    background-color: $color-button-text
+
+    +pad-width
+      padding: 30px
+    +small-pad-width
+      padding: 30px
+    +phone-width
+      padding: 15px
+      margin-left: 15px
+      margin-right: 15px
+      margin-top: 15px
+      margin-bottom: 15px
+
+    &-container
+      position: fixed
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      display: flex
+      justify-content: center
+      align-items: center
+      overflow: auto
+
+    &-background
+      position: absolute
+      height: 100%
+      width: 100%
+      opacity: 0.8
+      z-index: 2
+      top: 0
+      left: 0
+      background-color: #333333
+
+    .main__header
+      font-family: $font-roboto
+      font-size: 24px
+      font-weight: 500
+      line-height: 1.5
+      color: $color-title
+
+      .main__close-icon
+        // color: lighten($color-title, 20%)
+        &:hover
+          // color: $color-white
+          cursor: pointer
+
+    .main__sub-header
+      font-family: $font-roboto
+      font-size: 16px
+      font-weight: 500
+      line-height: 1.5
+      color: $color-title
+    p
+      font-family: $font-roboto
+      font-size: 16px
+      font-weight: normal
+      font-style: normal
+      font-stretch: normal
+      line-height: 1.5
+      letter-spacing: normal
+      color: $color-white
+
+  &__paypal
+    &-button
+      display: inline-flex
+      border-radius: 100px
+      background-color: $color-yellow
+      font-family: $font-roboto
+      font-size: 16px
+      font-weight: 500
+      line-height: 1.5
+      color: #5f6062
+      padding: 15px 30px
+      justify-content: center
+      align-items: center
+      cursor: pointer
+
+    &-icon
+      margin-left: 10px
+
+  &__generate-icon,
+  &__edit-icon,
+  &__copy-icon,
+  &__close-icon,
+  &__tick-icon
+    vertical-align: text-top
+    width: 20px
+    margin-left: 5px

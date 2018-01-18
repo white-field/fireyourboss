@@ -1,0 +1,37 @@
+// =================================================
+// mixin / media
+// =================================================
+
+//先針對media queries的width設為變數
+$pc-media:     1024px
+$pcs-media:    1023px
+$pad-media:    760px
+$pads-media:   759px
+$phone-media:  480px
+$phones-media: 479px
+
+/*把變數帶入mixin中，此mixin只就單純把media queries寫到我的mixin中，
+ *並且使用我上面設立的變數來調動media queries的width
+//電腦
+=pc-width
+  @media all and (min-width: $pc-media)
+    @content
+
+//平板
+=pad-width
+  @media all and (min-width: $pad-media) and (max-width: $pcs-media)
+    @content
+
+//小平板
+=small-pad-width
+  @media all and (min-width: $phone-media) and (max-width: $pads-media)
+    @content
+
+//手機
+=phone-width
+  @media all and (max-width: $phones-media)
+    @content
+
+// =================================================
+// End mixin
+// =================================================

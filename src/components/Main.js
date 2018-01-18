@@ -1,5 +1,5 @@
 import 'normalize.css/normalize.css';
-import 'styles/App.css';
+import 'styles/App.sass';
 import 'flexboxgrid';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -11,18 +11,28 @@ import paragraphs from '../sources/paragraphs';
 import moment from 'moment';
 
 import paypalIcon from '../images/pay-pal.svg';
-
+import closeIcon from '../images/ico-close.svg';
+import copyIcon from '../images/ico-copy.svg';
+import editIcon from '../images/ico-edit.svg';
+import generateIcon from '../images/ico-generate.svg';
+import tickIcon from '../images/ico-tick.svg';
 
 class AppComponent extends React.Component {
   constructor() {
     super();
     this.state = {
       name: 'John Doe',
+      nameLength: 360,
       company: 'ABC Corp',
-      position: 'designer',
+      companyLength: 360,
+      position: 'Designer',
+      positionLength: 360,
       duration: '15 months',
+      durationLength: 360,
       bossName: 'Jane Doe',
-      lastDay: moment().format('LL'),
+      bossNameLength: 360,
+      lastDay: moment().add(1, 'months').format('LL'),
+      lastDayLength: 480,
       paragraph1: null,
       paragraph2: null,
       paragraph3: null,
@@ -31,7 +41,8 @@ class AppComponent extends React.Component {
       paragraph6: null,
       paragraph7: null,
       showLetter: false,
-      popupPage: null
+      popupPage: null,
+      copyLetter: false
     };
   }
 
@@ -50,24 +61,30 @@ class AppComponent extends React.Component {
       paragraph5: randomize(paragraphs.getParagraph5()),
       paragraph6: randomize(paragraphs.getParagraph6()),
       paragraph7: randomize(paragraphs.getParagraph7())
-    })
+    });
+    this.copyLetterReset();
   }
 
   componentDidMount() {
     this.randomizeParagraphs();
   }
 
-  renderVariableInput(field) {
-    return <input type="text" className='main__variable-input' placeholder={this.state[field]} onChange={(e) => {
+  renderVariableInput(field, width) {
+    // var width = '120px';
+    return <input type="text" style={{'width' : this.state[width]}} className='main__variable-input' placeholder={this.state[field]} onChange={(e) => {
       this.setState({
-        [`${field}`]: e.target.value
+        [`${field}`]: e.target.value,
+        // [`${width}`]: e.target.value ? e.target.value.length * 48 : 150
       });
+      // console.log(e.target.value);
+      // console.log(e.target.placeholder.length * 48 );
     }}/>
   }
 
   generateLetter() {
     this.randomizeParagraphs();
     this.showLetter();
+    this.copyLetterReset();
   }
 
   showLetter() {
@@ -94,6 +111,18 @@ class AppComponent extends React.Component {
     })
   }
 
+  copyLetter() {
+    this.setState({
+      copyLetter: true
+    });
+  }
+
+  copyLetterReset(){
+    this.setState({
+      copyLetter: false
+    });
+  }
+
   render() {
     const state = this.state;
     const renderVariableInput = this.renderVariableInput.bind(this);
@@ -104,6 +133,7 @@ class AppComponent extends React.Component {
         popupPage = <div>
           <div className="main__header">
             About
+            <img className="main__close-icon right" src={closeIcon} onClick={this.hidePopupPage.bind(this)}/>
           </div>
           <p>
             Tired of your current job, can’t wait to fire your boss?
@@ -142,6 +172,7 @@ class AppComponent extends React.Component {
         popupPage = <div>
           <div className="main__header">
             Give feedback
+            <img className="main__close-icon right" src={closeIcon} onClick={this.hidePopupPage.bind(this)}/>
           </div>
           <p>
             Found bugs ? Have loads of thoughts about improving this tool? Let’s chat ! <a
@@ -155,25 +186,27 @@ class AppComponent extends React.Component {
       <div className="root">
         <div className="grid main__instruction-container">
           <div className="row">
+            <div className="main__title-container col-sm-6 col-xs-12">
+              <div className="main__title">Fireyourboss</div>
+              <div className="main__subtitle">Generate your customized resignation letter</div>
+            </div>
+            <div className="main__menu-container col-sm-6 col-xs-12">
+              <a className="main__feedback" onClick={this.showPopupPage.bind(this, 'feedback')}>Give feedback</a>
+              <a className="main__about" onClick={this.showPopupPage.bind(this, 'about')}>About</a>
+            </div>
+          </div>
+          <div className="row">
             <div className="col-xs-12">
-              My name is {renderVariableInput('name')}working in {renderVariableInput('company')} as
-              a {renderVariableInput('position')} for {renderVariableInput('duration')}. Now I am
-              gonna fire my boss {renderVariableInput('bossName')} and the last day we
-              will see each other will be {renderVariableInput('lastDay')}.
+              My name is {renderVariableInput('name','nameLength')}working in {renderVariableInput('company','companyLength')} as
+              a {renderVariableInput('position','positionLength')} for {renderVariableInput('duration','durationLength')}. Now I am
+              gonna fire my boss {renderVariableInput('bossName','bossNameLength')} and the last day we
+              will see each other will be {renderVariableInput('lastDay','lastDayLength')}.
             </div>
             <div className="main__button-container">
               <button className="main__generate-button" onClick={this.generateLetter.bind(this)}>
-                Generate
+                Generate <img className="main__generate-icon" src={generateIcon}/>
               </button>
             </div>
-          </div>
-          <div className="main__title-container">
-            <div className="main__title">Fireyourboss</div>
-            <div className="main__subtitle">Generate your customized resignation letter</div>
-          </div>
-          <div className="main__menu-container">
-            <div className="main__feedback" onClick={this.showPopupPage.bind(this, 'feedback')}>Give feedback</div>
-            <div className="main__about" onClick={this.showPopupPage.bind(this, 'about')}>About</div>
           </div>
         </div>
 
@@ -186,17 +219,20 @@ class AppComponent extends React.Component {
             <div className="grid main__generated-letter-overlay-top-container">
               <div>
                 <button className="main__generated-letter-overlay-button" onClick={this.randomizeParagraphs.bind(this)}>
-                  Re-generate
+                  <span className="label">Re-Generate</span> <img className="main__generate-icon" src={generateIcon}/>
                 </button>
-                <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}>Edit
+                <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}> <span className="label"> Edit</span> <img className="main__edit-icon" src={editIcon}/>
                 </button>
-                <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, "")}>
-                  <button className="main__generated-letter-overlay-button">Copy</button>
+                <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, '')} onCopy={this.copyLetter.bind(this)}>
+                  <button className="main__generated-letter-overlay-button" >
+                    {state.copyLetter  ? <span>Copied <img className="main__tick-icon" src={tickIcon}/></span> : <span>Copy <img className="main__copy-icon" src={copyIcon}/></span>}
+                  </button>
                 </CopyToClipboard>
+
               </div>
             </div>
             <div className="grid">
-              <div className="col-xs-10 grid">
+              <div className="col-xs-12 col-md-10 grid">
                 <div className="box main__generated-letter-container"
                      dangerouslySetInnerHTML={{
                        __html: nl2br(letter)
