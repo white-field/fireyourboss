@@ -61,11 +61,8 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
-<<<<<<< HEAD
     "D": "^1.0.0",
-=======
     "build": "^0.1.4",
->>>>>>> 69a69f0add795873c58a489aaaf3d26f0872425d
     "classnames": "^2.2.5",
     "core-js": "^2.0.0",
     "flexboxgrid": "^6.3.1",
