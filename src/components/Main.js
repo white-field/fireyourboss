@@ -141,8 +141,7 @@ class AppComponent extends React.Component {
           <p>
             But wait, you are professional. You spent time and brainpower to search for templates and customize your
             words into a nice, proper resignation letter. But searching and browsing is exhausting. Why not make
-            yourself a high quality, customised letter in a click? If you don’t like a sentence, tap and swap it.
-            Resignation should be hassle-free and easy breezy.
+            yourself a high quality, customised letter in a click? Resignation should be hassle-free and easy breezy.
           </p>
           <p>
             We don’t ever collect any of your data. Our suggestions are completely randomized from handpicked best
@@ -152,13 +151,13 @@ class AppComponent extends React.Component {
             Who we are
           </div>
           <p>
-            We are a designer + developer duo from Hong Kong, currently based in London. We have a passion for
-            products, bringing nice little convenience to people with nice little tools. ♡
+            We are a designer + developer duo from Hong Kong. We have a passion for
+            products, bringing nice little convenience to people with nice little tools.
           </p>
           <p>
             If you like this project, welcome to buy us a coffee via Paypal!
           </p>
-          <form id="pay-pal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <form id="pay-pal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
             <input type="hidden" name="cmd" value="_s-xclick"/>
             <input type="hidden" name="hosted_button_id" value="JPRBAN5B75KZL"/>
             <div className="main__paypal-button" onClick={() => document.forms['pay-pal-form'].submit()}>
