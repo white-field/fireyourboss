@@ -24,19 +24,23 @@ body
   font-weight: 400
   font-style: normal
   font-size: 48px
-  line-height: 1.25
+  line-height: 1.5
   color: $color-white
   // min-width: 1024px
   -webkit-font-smoothing: antialiased
   overflow-y: scroll
 
-  +pad-width
+  +tablet-l
+    font-size: 42px
+    line-height: 60px
+
+  +tablet-m
     font-size: 32px
-    line-height: 1.5
-  +small-pad-width
-    font-size: 32px
-  +phone-width
-    font-size: 18px
+    line-height: 60px
+
+  +mobile
+    font-size: 24px
+    line-height: 50px
 
 button
   outline: none
@@ -75,6 +79,9 @@ a
   font-size: 18px
   line-height: 1.33
 
+  +mobile
+    font-size: 12px
+
 .root
   position: relative
 
@@ -88,8 +95,8 @@ a
     // top: 0
     // left: 10px
 
-    +phone-width
-      padding-bottom: 35px
+    +mobile
+      padding-bottom: 30px
 
   &__title
     font-family: $font-roboto
@@ -105,6 +112,9 @@ a
     line-height: 1.5
     color: lighten($color-title, 20%)
 
+    +mobile
+      font-size: 12px
+
   &__menu-container
     // position: absolute
     // right: 10px
@@ -112,27 +122,21 @@ a
     // padding-top: 65px
     padding-bottom: 65px
 
-    +small-pad-width
+    +tablet
       position: absolute
-      right: 0px
-      top: 0px
+      right: 23px
+      top: 10px
       padding-left: 15px
-      // padding-top: 10px
-      // padding-bottom: 10px
       width: 100%
       padding-bottom: 0
-      background: $color-blue-dark
 
-    +phone-width
+    +mobile
       position: absolute
-      right: 0px
+      right: 15px
       top: 0px
       padding-left: 15px
-      // padding-top: 10px
-      // padding-bottom: 10px
       width: 100%
       padding-bottom: 0
-      background: $color-blue-dark
 
   &__about, &__feedback
     font-family: $font-roboto
@@ -142,21 +146,21 @@ a
     // color: $color-white
     color: lighten($color-title, 20%)
     float: right
-    margin-left: 20px
+    margin-left: 15px
     cursor: pointer
     &:hover
       color: $color-white
       transition: $transition1
 
-    +small-pad-width
-      padding-top: 5px
+    +tablet
+      padding-top: 10px
       padding-bottom: 5px
-      color: $color-white
+      font-size: 12px
 
-    +phone-width
-      padding-top: 5px
+    +mobile
+      padding-top: 10px
       padding-bottom: 5px
-      color: $color-white
+      font-size: 12px
 
   &__instruction-container
     position: relative
@@ -167,12 +171,18 @@ a
     padding-left: 15px
     padding-right: 15px
 
-    +phone-width
+    +non-desktop
+      padding-left: 36px
+      padding-right: 36px
+
+    +mobile
       padding-top: 45px
+      padding-left: 23px
+      padding-right: 23px
 
   &__variable-input
     text-align: center
-    // width: 360px
+    width: 360px
     outline: none
     background-color: transparent
     border-top: none
@@ -181,18 +191,34 @@ a
     border-bottom: solid 1px $color-blue-light
     color: darken($color-button,5%)
     display: inline-block
+    appearance: none
 
     &:focus
       color: darken($color-button,5%)
       border-bottom: solid 1px $color-white
 
-    +pad-width
-      width: 240px
+    &.lastDay-input
+      // width: 480px
 
-    +phone-width
-      width: auto
-      margin-bottom: 15px
+    +non-desktop
+      width: 250px
+      line-height: 1
+
+    +mobile
+      width: 150px
+      // margin-bottom: 5px
       max-width: 100%
+
+      // border: 1px solid red
+      box-sizing: border-box //iOS bug fix
+      line-height: 1 //iOS bug fix
+      height: 34px //iOS bug fix
+      padding-top: 3px //iOS bug fix
+      padding-bottom: 0 //iOS bug fix
+      vertical-align: middle //iOS bug fix
+
+      &.lastDay-input
+        width: 180px
 
   &__button-container
     width: 100%
@@ -207,7 +233,7 @@ a
     font-weight: 500
     margin-top: 60px
 
-    +phone-width
+    +mobile
       margin-top: 45px
 
     .main__generate-icon
@@ -227,11 +253,13 @@ a
       margin-bottom: 176px
       padding: 100px 95px
 
-      +small-pad-width
-        padding: 30px 30px
+      +tablet
+        padding: 60px 60px 80px
 
-      +phone-width
-        padding: 30px 15px
+      +mobile
+        padding: 30px 23px 60px
+        margin-left: 8px
+        margin-right: 8px
         font-size: 18px
 
     &-overlay
@@ -249,6 +277,15 @@ a
         margin-top: 60px
         margin-bottom: 60px
 
+        +non-desktop
+          margin-top: 40px
+          margin-bottom: 40px
+
+        +mobile
+          margin-top: 25px
+          margin-bottom: 25px
+          margin-right: 12px
+
       &-button
         font-family: $font-roboto
         line-height: 1.5
@@ -261,12 +298,21 @@ a
         margin-left: 10px
         margin-right: 10px
 
-        +phone-width
+        &.active
+          color: $color-button
+          background-color: darken($color-blue-dark,3%)
+          box-shadow: none
+
+        +mobile
           margin-left: 5px
           margin-right: 5px
+          padding: 12px 20px
 
         .label
-          +phone-width
+          +tablet
+            display: none
+
+          +mobile
             display: none
 
       &-enter
@@ -290,14 +336,13 @@ a
     z-index: 3
     background-color: $color-button-text
 
-    +pad-width
-      padding: 30px
-    +small-pad-width
-      padding: 30px
-    +phone-width
-      padding: 15px
-      margin-left: 15px
-      margin-right: 15px
+    +tablet
+      padding: 45px
+
+    +mobile
+      padding: 25px 25px 40px
+      margin-left: 23px
+      margin-right: 23px
       margin-top: 15px
       margin-bottom: 15px
 
@@ -311,6 +356,10 @@ a
       justify-content: center
       align-items: center
       overflow: auto
+
+      +mobile
+        position: absolute
+        align-items: flex-start
 
     &-background
       position: absolute
@@ -365,9 +414,14 @@ a
       justify-content: center
       align-items: center
       cursor: pointer
+      flex-wrap: wrap
 
     &-icon
       margin-left: 10px
+
+      +mobile
+        // width: 40px
+        margin-top: 5px
 
   &__generate-icon,
   &__edit-icon,
@@ -377,3 +431,6 @@ a
     vertical-align: text-top
     width: 20px
     margin-left: 5px
+
+    +mobile
+      margin-left: 0

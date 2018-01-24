@@ -1,6 +1,6 @@
 function wrapSpan(str) {
   return `<span class='main__variable-in-paragraph'>${str}</span>`
-};
+}
 
 export default {
   getParagraph1 (position, company, lastDay) {
