@@ -15,24 +15,18 @@ import closeIcon from '../images/ico-close.svg';
 import copyIcon from '../images/ico-copy.svg';
 import editIcon from '../images/ico-edit.svg';
 import generateIcon from '../images/ico-generate.svg';
-import tickIcon from '../images/ico-tick.svg';
+import tickIcon from '../images/ico-tick-active.svg';
 
 class AppComponent extends React.Component {
   constructor() {
     super();
     this.state = {
       name: 'John Doe',
-      nameLength: 360,
       company: 'ABC Corp',
-      companyLength: 360,
       position: 'Designer',
-      positionLength: 360,
       duration: '15 months',
-      durationLength: 360,
       bossName: 'Jane Doe',
-      bossNameLength: 360,
-      lastDay: moment().add(1, 'months').format('LL'),
-      lastDayLength: 480,
+      lastDay: moment().add(1, 'months').format('ll'),
       paragraph1: null,
       paragraph2: null,
       paragraph3: null,
@@ -70,14 +64,10 @@ class AppComponent extends React.Component {
   }
 
   renderVariableInput(field, width) {
-    // var width = '120px';
-    return <input type="text" style={{'width' : this.state[width]}} className='main__variable-input' placeholder={this.state[field]} onChange={(e) => {
+    return <input type="text" className={'main__variable-input ' + field+'-input'} placeholder={this.state[field]} onChange={(e) => {
       this.setState({
         [`${field}`]: e.target.value,
-        // [`${width}`]: e.target.value ? e.target.value.length * 48 : 150
       });
-      // console.log(e.target.value);
-      // console.log(e.target.placeholder.length * 48 );
     }}/>
   }
 
@@ -85,6 +75,7 @@ class AppComponent extends React.Component {
     this.randomizeParagraphs();
     this.showLetter();
     this.copyLetterReset();
+    this.scrollToTop();
   }
 
   showLetter() {
@@ -123,10 +114,18 @@ class AppComponent extends React.Component {
     });
   }
 
+  scrollToTop(){
+    window.scrollTo(0, 0);
+  }
+
+  isActive(value){
+    return ((value) ?'active':'default');
+  }
+
   render() {
     const state = this.state;
     const renderVariableInput = this.renderVariableInput.bind(this);
-    const letter = `<span class="right date">${moment().format('LL')}</span>\n\nDear <span class='main__variable-in-paragraph'>${state.bossName}</span>,\n\n${state.paragraph1} \n\n${state.paragraph2} ${state.paragraph3} ${state.paragraph4} ${state.paragraph5} \n\n${state.paragraph6} ${state.paragraph7}\n\nSincerely,\n<span class='main__variable-in-paragraph'>${state.name}</span>`;
+    const letter = `<span class="right date">${moment().format('ll')}</span>\n\nDear <span class='main__variable-in-paragraph'>${state.bossName}</span>,\n\n${state.paragraph1} \n\n${state.paragraph2} ${state.paragraph3} ${state.paragraph4} ${state.paragraph5} \n\n${state.paragraph6} ${state.paragraph7}\n\nSincerely,\n<span class='main__variable-in-paragraph'>${state.name}</span>`;
     let popupPage;
     switch (this.state.popupPage) {
       case 'about':
@@ -223,7 +222,7 @@ class AppComponent extends React.Component {
                 <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}> <span className="label"> Edit</span> <img className="main__edit-icon" src={editIcon}/>
                 </button>
                 <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, '')} onCopy={this.copyLetter.bind(this)}>
-                  <button className="main__generated-letter-overlay-button" >
+                  <button className={'main__generated-letter-overlay-button ' + this.isActive(state.copyLetter)} >
                     {state.copyLetter  ? <span>Copied <img className="main__tick-icon" src={tickIcon}/></span> : <span>Copy <img className="main__copy-icon" src={copyIcon}/></span>}
                   </button>
                 </CopyToClipboard>
