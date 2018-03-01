@@ -173,9 +173,12 @@ class AppComponent extends React.Component {
             <img className="main__close-icon right" src={closeIcon} onClick={this.hidePopupPage.bind(this)}/>
           </div>
           <p>
-            Found bugs ? Have loads of thoughts about improving this tool? Let’s chat ! <a
-            href="mailto:hello@liltool.com">hello@liltool.com</a>
+            Found bugs ? Have loads of thoughts about improving this tool? Let us know - <a
+            href="https://goo.gl/forms/hkLefDMT0gpbZAcN2" target="_blank">Fill in this survey</a>
           </p>
+
+                    <p>Want a chat? Email us at <a
+            href="mailto:hello@liltool.com">hello@liltool.com</a></p>
         </div>
         break;
     }
