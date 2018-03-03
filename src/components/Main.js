@@ -219,13 +219,13 @@ class AppComponent extends React.Component {
           {state.showLetter && <div className="main__generated-letter-overlay">
             <div className="grid main__generated-letter-overlay-top-container">
               <div>
-                <button className="main__generated-letter-overlay-button" onClick={this.randomizeParagraphs.bind(this)}>
+                <button className="main__generated-letter-overlay-button main__regenerate" onClick={this.randomizeParagraphs.bind(this)}>
                   <span className="label">Re-Generate</span> <img className="main__generate-icon" src={generateIcon}/>
                 </button>
-                <button className="main__generated-letter-overlay-button" onClick={this.hideLetter.bind(this)}> <span className="label"> Edit</span> <img className="main__edit-icon" src={editIcon}/>
+                <button className="main__generated-letter-overlay-button main__edit" onClick={this.hideLetter.bind(this)}> <span className="label"> Edit</span> <img className="main__edit-icon" src={editIcon}/>
                 </button>
                 <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, '')} onCopy={this.copyLetter.bind(this)}>
-                  <button className={'main__generated-letter-overlay-button ' + this.isActive(state.copyLetter)} >
+                  <button className={'main__generated-letter-overlay-button main__regenerate ' + this.isActive(state.copyLetter)} >
                     {state.copyLetter  ? <span>Copied <img className="main__tick-icon" src={tickIcon}/></span> : <span>Copy <img className="main__copy-icon" src={copyIcon}/></span>}
                   </button>
                 </CopyToClipboard>
