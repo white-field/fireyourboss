@@ -225,7 +225,7 @@ class AppComponent extends React.Component {
                 <button className="main__generated-letter-overlay-button main__edit" onClick={this.hideLetter.bind(this)}> <span className="label"> Edit</span> <img className="main__edit-icon" src={editIcon}/>
                 </button>
                 <CopyToClipboard text={letter.replace(/(<([^>]+)>)/ig, '')} onCopy={this.copyLetter.bind(this)}>
-                  <button className={'main__generated-letter-overlay-button main__regenerate ' + this.isActive(state.copyLetter)} >
+                  <button className={'main__generated-letter-overlay-button main__copy ' + this.isActive(state.copyLetter)} >
                     {state.copyLetter  ? <span>Copied <img className="main__tick-icon" src={tickIcon}/></span> : <span>Copy <img className="main__copy-icon" src={copyIcon}/></span>}
                   </button>
                 </CopyToClipboard>
