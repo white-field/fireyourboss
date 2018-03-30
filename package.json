@@ -74,6 +74,7 @@
     "react": "^15.0.0",
     "react-addons-css-transition-group": "^15.6.0",
     "react-copy-to-clipboard": "^5.0.0",
+    "react-datepicker": "^1.2.2",
     "react-dom": "^15.0.0",
     "react-moment": "^0.4.2",
     "sass-loader": "^6.0.6"

@@ -10,6 +10,9 @@ import paragraphs from '../sources/paragraphs';
 
 import moment from 'moment';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import paypalIcon from '../images/pay-pal.svg';
 import closeIcon from '../images/ico-close.svg';
 import copyIcon from '../images/ico-copy.svg';
@@ -26,7 +29,7 @@ class AppComponent extends React.Component {
       position: 'Designer',
       duration: '15 months',
       bossName: 'Jane Doe',
-      lastDay: moment().add(1, 'months').format('ll'),
+      // lastDay: moment().add(1, 'months').format('ll'),
       paragraph1: null,
       paragraph2: null,
       paragraph3: null,
@@ -36,8 +39,15 @@ class AppComponent extends React.Component {
       paragraph7: null,
       showLetter: false,
       popupPage: null,
-      copyLetter: false
+      copyLetter: false,
+      lastDay: moment().add(0, 'months'),
+      isDatepickerOpen: false,
+      isLastdaySelect: false
     };
+
+    // document.addEventListener('gesturestart', function (e) {
+    //   e.preventDefault();
+    // });
   }
 
   randomize(arr) {
@@ -47,8 +57,10 @@ class AppComponent extends React.Component {
   randomizeParagraphs() {
     const state = this.state;
     const randomize = this.randomize;
+    const stringLastDate = this.convertIntDateToString(state.lastDay); // Convert number date to string
+
     this.setState({
-      paragraph1: randomize(paragraphs.getParagraph1(state.position, state.company, state.lastDay)),
+      paragraph1: randomize(paragraphs.getParagraph1(state.position, state.company, stringLastDate)),
       paragraph2: randomize(paragraphs.getParagraph2()),
       paragraph3: randomize(paragraphs.getParagraph3(state.duration)),
       paragraph4: randomize(paragraphs.getParagraph4()),
@@ -69,6 +81,10 @@ class AppComponent extends React.Component {
         [`${field}`]: e.target.value,
       });
     }}/>
+  }
+
+  renderDatepickerInput() {
+    return <input className={'main__variable-input'} type="text" placeholder={this.convertIntDateToString(this.state.lastDay)} onClick={this.toggleCalendar.bind(this)} value={this.state.isLastdaySelect? this.convertIntDateToString(this.state.lastDay): ""} readOnly />
   }
 
   generateLetter() {
@@ -122,9 +138,37 @@ class AppComponent extends React.Component {
     return ((value) ?'active':'default');
   }
 
+  convertIntDateToString(number){
+    return moment(number).format("ll"); // ll = MMM DD, YYYY
+  }
+
+  handleChange(date) {
+    this.setState({
+        lastDay: date
+      });
+    this.toggleCalendar();
+  }
+
+  toggleCalendar (e) {
+    e && e.preventDefault()
+    this.setState({
+      isDatepickerOpen: !this.state.isDatepickerOpen,
+      isLastdaySelect : true
+    })
+  }
+
+  closeCalendar (e) {
+    e && e.preventDefault()
+    this.setState({
+      isDatepickerOpen: false,
+      isLastdaySelect : false
+    })
+  }
+
   render() {
     const state = this.state;
     const renderVariableInput = this.renderVariableInput.bind(this);
+    const renderDatepickerInput = this.renderDatepickerInput.bind(this);
     const letter = `<span class="right date">${moment().format('ll')}</span>\n\nDear <span class='main__variable-in-paragraph'>${state.bossName}</span>,\n\n${state.paragraph1} \n\n${state.paragraph2} ${state.paragraph3} ${state.paragraph4} ${state.paragraph5} \n\n${state.paragraph6} ${state.paragraph7}\n\nSincerely,\n<span class='main__variable-in-paragraph'>${state.name}</span>`;
     let popupPage;
     switch (this.state.popupPage) {
@@ -201,7 +245,8 @@ class AppComponent extends React.Component {
               My name is {renderVariableInput('name','nameLength')}working in {renderVariableInput('company','companyLength')} as
               a {renderVariableInput('position','positionLength')} for {renderVariableInput('duration','durationLength')}. Now I am
               gonna fire my boss {renderVariableInput('bossName','bossNameLength')} and the last day we
-              will see each other will be {renderVariableInput('lastDay','lastDayLength')}.
+              will see each other will be {renderDatepickerInput()}.
+              { this.state.isDatepickerOpen && ( <DatePicker selected={this.state.lastDay} onChange={this.handleChange.bind(this)} withPortal inline readOnly showDisabledMonthNavigation minDate={moment()} onClickOutside={ this.closeCalendar.bind(this)} /> ) }
             </div>
             <div className="main__button-container">
               <button className="main__generate-button" onClick={this.generateLetter.bind(this)}>

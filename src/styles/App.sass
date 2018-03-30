@@ -434,3 +434,38 @@ a
 
     +mobile
       margin-left: 0
+
+.react-datepicker__portal
+  background-color: #333 !important
+  background-color: rgba(51, 51, 51, 0.8) !important
+
+  .react-datepicker
+    border: none !important
+
+    .react-datepicker
+      &__header
+        background: $color-blue-dark
+        color: $color-white
+
+      &__current-month,
+      &__day-name
+        color: $color-white
+
+      &__day
+        font-size: 1.5em
+
+      &__day--selected
+        background-color: $color-blue-dark
+        color: $color-white
+
+      &__month-dropdown
+        background: $color-blue-dark
+        border: none
+
+      &__month-read-view--down-arrow
+        border-top-color: $color-button
+
+      &__navigation--previous,
+        border-right-color: $color-button
+      &__navigation--next
+        border-left-color: $color-button
