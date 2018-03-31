@@ -465,7 +465,22 @@ a
       &__month-read-view--down-arrow
         border-top-color: $color-button
 
-      &__navigation--previous,
-        border-right-color: $color-button
-      &__navigation--next
-        border-left-color: $color-button
+      &__navigation
+        border-radius: 0
+        top: 13px
+
+        &--previous
+          &:hover
+            background: none
+            border-right-color: $color-button
+
+          &--disabled
+            border-right-color: $color-button-text
+            &:hover
+              background: none
+              border-right-color: $color-button-text
+
+        &--next
+          &:hover
+            background: none
+            border-left-color: $color-button

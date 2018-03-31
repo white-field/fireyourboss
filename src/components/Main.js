@@ -142,11 +142,12 @@ class AppComponent extends React.Component {
     return moment(number).format("ll"); // ll = MMM DD, YYYY
   }
 
-  handleChange(date) {
+  handleLastDateChange(date) {
     this.setState({
         lastDay: date
       });
     this.toggleCalendar();
+    console.log("clicked");
   }
 
   toggleCalendar (e) {
@@ -246,7 +247,7 @@ class AppComponent extends React.Component {
               a {renderVariableInput('position','positionLength')} for {renderVariableInput('duration','durationLength')}. Now I am
               gonna fire my boss {renderVariableInput('bossName','bossNameLength')} and the last day we
               will see each other will be {renderDatepickerInput()}.
-              { this.state.isDatepickerOpen && ( <DatePicker selected={this.state.lastDay} onChange={this.handleChange.bind(this)} withPortal inline readOnly showDisabledMonthNavigation minDate={moment()} onClickOutside={ this.closeCalendar.bind(this)} /> ) }
+              { this.state.isDatepickerOpen && ( <DatePicker selected={this.state.lastDay} onChange={this.handleLastDateChange.bind(this)} withPortal inline readOnly showDisabledMonthNavigation minDate={moment()} onClickOutside={ this.closeCalendar.bind(this)} /> ) }
             </div>
             <div className="main__button-container">
               <button className="main__generate-button" onClick={this.generateLetter.bind(this)}>
